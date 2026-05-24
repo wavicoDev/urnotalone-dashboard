@@ -73,6 +73,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "7~12세 아동 정서 케어 AI '도리'의 부모·교사용 대시보드. 아이의 마음 신호를 부드럽게 닿게 합니다.",
       },
+      { property: "og:title", content: "URNOTALONE · 도리 대시보드" },
+      { name: "twitter:title", content: "URNOTALONE · 도리 대시보드" },
+      { name: "description", content: "This app assists in spec-driven development by saving specifications and guiding development based on them." },
+      { property: "og:description", content: "This app assists in spec-driven development by saving specifications and guiding development based on them." },
+      { name: "twitter:description", content: "This app assists in spec-driven development by saving specifications and guiding development based on them." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3bce9335-ff42-43fc-9e3b-180dffbec74f/id-preview-2308ae40--15815433-8401-47d6-a34f-4d89f0aba2c4.lovable.app-1779583396981.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3bce9335-ff42-43fc-9e3b-180dffbec74f/id-preview-2308ae40--15815433-8401-47d6-a34f-4d89f0aba2c4.lovable.app-1779583396981.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
