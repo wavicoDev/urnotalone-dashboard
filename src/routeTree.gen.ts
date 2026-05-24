@@ -18,12 +18,15 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ParentIndexRouteImport } from './routes/parent.index'
 import { Route as ParentTimelineRouteImport } from './routes/parent.timeline'
+import { Route as ParentResourcesRouteImport } from './routes/parent.resources'
 import { Route as ParentHomeRouteImport } from './routes/parent.home'
 import { Route as ParentGrowthRouteImport } from './routes/parent.growth'
 import { Route as ParentCoachingRouteImport } from './routes/parent.coaching'
 import { Route as ParentChildRouteImport } from './routes/parent.child'
 import { Route as ParentAlertsRouteImport } from './routes/parent.alerts'
+import { Route as ParentAccountRouteImport } from './routes/parent.account'
 import { Route as ParentAlertsAlertIdRouteImport } from './routes/parent.alerts.$alertId'
 
 const TermsRoute = TermsRouteImport.update({
@@ -71,9 +74,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ParentIndexRoute = ParentIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ParentRoute,
+} as any)
 const ParentTimelineRoute = ParentTimelineRouteImport.update({
   id: '/timeline',
   path: '/timeline',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentResourcesRoute = ParentResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
   getParentRoute: () => ParentRoute,
 } as any)
 const ParentHomeRoute = ParentHomeRouteImport.update({
@@ -101,6 +114,11 @@ const ParentAlertsRoute = ParentAlertsRouteImport.update({
   path: '/alerts',
   getParentRoute: () => ParentRoute,
 } as any)
+const ParentAccountRoute = ParentAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => ParentRoute,
+} as any)
 const ParentAlertsAlertIdRoute = ParentAlertsAlertIdRouteImport.update({
   id: '/$alertId',
   path: '/$alertId',
@@ -117,12 +135,15 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/parent/account': typeof ParentAccountRoute
   '/parent/alerts': typeof ParentAlertsRouteWithChildren
   '/parent/child': typeof ParentChildRoute
   '/parent/coaching': typeof ParentCoachingRoute
   '/parent/growth': typeof ParentGrowthRoute
   '/parent/home': typeof ParentHomeRoute
+  '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/parent/': typeof ParentIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
 }
 export interface FileRoutesByTo {
@@ -131,16 +152,18 @@ export interface FileRoutesByTo {
   '/governance': typeof GovernanceRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
-  '/parent': typeof ParentRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/parent/account': typeof ParentAccountRoute
   '/parent/alerts': typeof ParentAlertsRouteWithChildren
   '/parent/child': typeof ParentChildRoute
   '/parent/coaching': typeof ParentCoachingRoute
   '/parent/growth': typeof ParentGrowthRoute
   '/parent/home': typeof ParentHomeRoute
+  '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/parent': typeof ParentIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
 }
 export interface FileRoutesById {
@@ -154,12 +177,15 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/parent/account': typeof ParentAccountRoute
   '/parent/alerts': typeof ParentAlertsRouteWithChildren
   '/parent/child': typeof ParentChildRoute
   '/parent/coaching': typeof ParentCoachingRoute
   '/parent/growth': typeof ParentGrowthRoute
   '/parent/home': typeof ParentHomeRoute
+  '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/parent/': typeof ParentIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
 }
 export interface FileRouteTypes {
@@ -174,12 +200,15 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/signup'
     | '/terms'
+    | '/parent/account'
     | '/parent/alerts'
     | '/parent/child'
     | '/parent/coaching'
     | '/parent/growth'
     | '/parent/home'
+    | '/parent/resources'
     | '/parent/timeline'
+    | '/parent/'
     | '/parent/alerts/$alertId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -188,16 +217,18 @@ export interface FileRouteTypes {
     | '/governance'
     | '/login'
     | '/onboarding'
-    | '/parent'
     | '/privacy'
     | '/signup'
     | '/terms'
+    | '/parent/account'
     | '/parent/alerts'
     | '/parent/child'
     | '/parent/coaching'
     | '/parent/growth'
     | '/parent/home'
+    | '/parent/resources'
     | '/parent/timeline'
+    | '/parent'
     | '/parent/alerts/$alertId'
   id:
     | '__root__'
@@ -210,12 +241,15 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/signup'
     | '/terms'
+    | '/parent/account'
     | '/parent/alerts'
     | '/parent/child'
     | '/parent/coaching'
     | '/parent/growth'
     | '/parent/home'
+    | '/parent/resources'
     | '/parent/timeline'
+    | '/parent/'
     | '/parent/alerts/$alertId'
   fileRoutesById: FileRoutesById
 }
@@ -296,11 +330,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/parent/': {
+      id: '/parent/'
+      path: '/'
+      fullPath: '/parent/'
+      preLoaderRoute: typeof ParentIndexRouteImport
+      parentRoute: typeof ParentRoute
+    }
     '/parent/timeline': {
       id: '/parent/timeline'
       path: '/timeline'
       fullPath: '/parent/timeline'
       preLoaderRoute: typeof ParentTimelineRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/resources': {
+      id: '/parent/resources'
+      path: '/resources'
+      fullPath: '/parent/resources'
+      preLoaderRoute: typeof ParentResourcesRouteImport
       parentRoute: typeof ParentRoute
     }
     '/parent/home': {
@@ -338,6 +386,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentAlertsRouteImport
       parentRoute: typeof ParentRoute
     }
+    '/parent/account': {
+      id: '/parent/account'
+      path: '/account'
+      fullPath: '/parent/account'
+      preLoaderRoute: typeof ParentAccountRouteImport
+      parentRoute: typeof ParentRoute
+    }
     '/parent/alerts/$alertId': {
       id: '/parent/alerts/$alertId'
       path: '/$alertId'
@@ -361,21 +416,27 @@ const ParentAlertsRouteWithChildren = ParentAlertsRoute._addFileChildren(
 )
 
 interface ParentRouteChildren {
+  ParentAccountRoute: typeof ParentAccountRoute
   ParentAlertsRoute: typeof ParentAlertsRouteWithChildren
   ParentChildRoute: typeof ParentChildRoute
   ParentCoachingRoute: typeof ParentCoachingRoute
   ParentGrowthRoute: typeof ParentGrowthRoute
   ParentHomeRoute: typeof ParentHomeRoute
+  ParentResourcesRoute: typeof ParentResourcesRoute
   ParentTimelineRoute: typeof ParentTimelineRoute
+  ParentIndexRoute: typeof ParentIndexRoute
 }
 
 const ParentRouteChildren: ParentRouteChildren = {
+  ParentAccountRoute: ParentAccountRoute,
   ParentAlertsRoute: ParentAlertsRouteWithChildren,
   ParentChildRoute: ParentChildRoute,
   ParentCoachingRoute: ParentCoachingRoute,
   ParentGrowthRoute: ParentGrowthRoute,
   ParentHomeRoute: ParentHomeRoute,
+  ParentResourcesRoute: ParentResourcesRoute,
   ParentTimelineRoute: ParentTimelineRoute,
+  ParentIndexRoute: ParentIndexRoute,
 }
 
 const ParentRouteWithChildren =
@@ -395,3 +456,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
