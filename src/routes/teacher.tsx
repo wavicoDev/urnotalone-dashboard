@@ -3,7 +3,7 @@ import { AppHeader } from "@/components/app-header";
 import { SideNav, type SideNavItem } from "@/components/side-nav";
 import { useRequireRole } from "@/lib/use-require-role";
 import { useApp } from "@/lib/app-context";
-import { Bell, Home, Users, FileText, Sparkles, Settings } from "lucide-react";
+import { Bell, Home, Users, FileText, Sparkles, Settings, HeartHandshake } from "lucide-react";
 
 export const Route = createFileRoute("/teacher")({ component: TeacherLayout });
 
@@ -13,6 +13,7 @@ const items: SideNavItem[] = [
   { to: "/teacher/alerts", label: "신호 알림", icon: Bell },
   { to: "/teacher/activities", label: "활동 라이브러리", icon: Sparkles },
   { to: "/teacher/report", label: "학급 주간 리포트", icon: FileText },
+  { to: "/teacher/resources", label: "외부 자원", icon: HeartHandshake },
   { to: "/teacher/account", label: "계정 · 설정", icon: Settings },
 ];
 
