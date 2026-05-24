@@ -33,8 +33,7 @@ jobs:
         run: npm run build
 
       - name: Prepare static files
-        run: |
-          cp dist/client/index.html dist/client/404.html
+        run: cp dist/index.html dist/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -42,7 +41,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/client
+          path: dist
 
   deploy:
     environment:
