@@ -23,6 +23,7 @@ import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
 import { Route as ParentIndexRouteImport } from './routes/parent.index'
 import { Route as TeacherRosterRouteImport } from './routes/teacher.roster'
 import { Route as TeacherHomeRouteImport } from './routes/teacher.home'
+import { Route as TeacherAlertsRouteImport } from './routes/teacher.alerts'
 import { Route as ParentTimelineRouteImport } from './routes/parent.timeline'
 import { Route as ParentResourcesRouteImport } from './routes/parent.resources'
 import { Route as ParentHomeRouteImport } from './routes/parent.home'
@@ -31,6 +32,8 @@ import { Route as ParentCoachingRouteImport } from './routes/parent.coaching'
 import { Route as ParentChildRouteImport } from './routes/parent.child'
 import { Route as ParentAlertsRouteImport } from './routes/parent.alerts'
 import { Route as ParentAccountRouteImport } from './routes/parent.account'
+import { Route as TeacherRosterStudentIdRouteImport } from './routes/teacher.roster.$studentId'
+import { Route as TeacherAlertsAlertIdRouteImport } from './routes/teacher.alerts.$alertId'
 import { Route as ParentAlertsAlertIdRouteImport } from './routes/parent.alerts.$alertId'
 
 const TermsRoute = TermsRouteImport.update({
@@ -103,6 +106,11 @@ const TeacherHomeRoute = TeacherHomeRouteImport.update({
   path: '/home',
   getParentRoute: () => TeacherRoute,
 } as any)
+const TeacherAlertsRoute = TeacherAlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => TeacherRoute,
+} as any)
 const ParentTimelineRoute = ParentTimelineRouteImport.update({
   id: '/timeline',
   path: '/timeline',
@@ -143,6 +151,16 @@ const ParentAccountRoute = ParentAccountRouteImport.update({
   path: '/account',
   getParentRoute: () => ParentRoute,
 } as any)
+const TeacherRosterStudentIdRoute = TeacherRosterStudentIdRouteImport.update({
+  id: '/$studentId',
+  path: '/$studentId',
+  getParentRoute: () => TeacherRosterRoute,
+} as any)
+const TeacherAlertsAlertIdRoute = TeacherAlertsAlertIdRouteImport.update({
+  id: '/$alertId',
+  path: '/$alertId',
+  getParentRoute: () => TeacherAlertsRoute,
+} as any)
 const ParentAlertsAlertIdRoute = ParentAlertsAlertIdRouteImport.update({
   id: '/$alertId',
   path: '/$alertId',
@@ -168,11 +186,14 @@ export interface FileRoutesByFullPath {
   '/parent/home': typeof ParentHomeRoute
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/alerts': typeof TeacherAlertsRouteWithChildren
   '/teacher/home': typeof TeacherHomeRoute
-  '/teacher/roster': typeof TeacherRosterRoute
+  '/teacher/roster': typeof TeacherRosterRouteWithChildren
   '/parent/': typeof ParentIndexRoute
   '/teacher/': typeof TeacherIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
+  '/teacher/alerts/$alertId': typeof TeacherAlertsAlertIdRoute
+  '/teacher/roster/$studentId': typeof TeacherRosterStudentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -191,11 +212,14 @@ export interface FileRoutesByTo {
   '/parent/home': typeof ParentHomeRoute
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/alerts': typeof TeacherAlertsRouteWithChildren
   '/teacher/home': typeof TeacherHomeRoute
-  '/teacher/roster': typeof TeacherRosterRoute
+  '/teacher/roster': typeof TeacherRosterRouteWithChildren
   '/parent': typeof ParentIndexRoute
   '/teacher': typeof TeacherIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
+  '/teacher/alerts/$alertId': typeof TeacherAlertsAlertIdRoute
+  '/teacher/roster/$studentId': typeof TeacherRosterStudentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -217,11 +241,14 @@ export interface FileRoutesById {
   '/parent/home': typeof ParentHomeRoute
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/alerts': typeof TeacherAlertsRouteWithChildren
   '/teacher/home': typeof TeacherHomeRoute
-  '/teacher/roster': typeof TeacherRosterRoute
+  '/teacher/roster': typeof TeacherRosterRouteWithChildren
   '/parent/': typeof ParentIndexRoute
   '/teacher/': typeof TeacherIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
+  '/teacher/alerts/$alertId': typeof TeacherAlertsAlertIdRoute
+  '/teacher/roster/$studentId': typeof TeacherRosterStudentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -244,11 +271,14 @@ export interface FileRouteTypes {
     | '/parent/home'
     | '/parent/resources'
     | '/parent/timeline'
+    | '/teacher/alerts'
     | '/teacher/home'
     | '/teacher/roster'
     | '/parent/'
     | '/teacher/'
     | '/parent/alerts/$alertId'
+    | '/teacher/alerts/$alertId'
+    | '/teacher/roster/$studentId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -267,11 +297,14 @@ export interface FileRouteTypes {
     | '/parent/home'
     | '/parent/resources'
     | '/parent/timeline'
+    | '/teacher/alerts'
     | '/teacher/home'
     | '/teacher/roster'
     | '/parent'
     | '/teacher'
     | '/parent/alerts/$alertId'
+    | '/teacher/alerts/$alertId'
+    | '/teacher/roster/$studentId'
   id:
     | '__root__'
     | '/'
@@ -292,11 +325,14 @@ export interface FileRouteTypes {
     | '/parent/home'
     | '/parent/resources'
     | '/parent/timeline'
+    | '/teacher/alerts'
     | '/teacher/home'
     | '/teacher/roster'
     | '/parent/'
     | '/teacher/'
     | '/parent/alerts/$alertId'
+    | '/teacher/alerts/$alertId'
+    | '/teacher/roster/$studentId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -412,6 +448,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeacherHomeRouteImport
       parentRoute: typeof TeacherRoute
     }
+    '/teacher/alerts': {
+      id: '/teacher/alerts'
+      path: '/alerts'
+      fullPath: '/teacher/alerts'
+      preLoaderRoute: typeof TeacherAlertsRouteImport
+      parentRoute: typeof TeacherRoute
+    }
     '/parent/timeline': {
       id: '/parent/timeline'
       path: '/timeline'
@@ -468,6 +511,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentAccountRouteImport
       parentRoute: typeof ParentRoute
     }
+    '/teacher/roster/$studentId': {
+      id: '/teacher/roster/$studentId'
+      path: '/$studentId'
+      fullPath: '/teacher/roster/$studentId'
+      preLoaderRoute: typeof TeacherRosterStudentIdRouteImport
+      parentRoute: typeof TeacherRosterRoute
+    }
+    '/teacher/alerts/$alertId': {
+      id: '/teacher/alerts/$alertId'
+      path: '/$alertId'
+      fullPath: '/teacher/alerts/$alertId'
+      preLoaderRoute: typeof TeacherAlertsAlertIdRouteImport
+      parentRoute: typeof TeacherAlertsRoute
+    }
     '/parent/alerts/$alertId': {
       id: '/parent/alerts/$alertId'
       path: '/$alertId'
@@ -517,15 +574,41 @@ const ParentRouteChildren: ParentRouteChildren = {
 const ParentRouteWithChildren =
   ParentRoute._addFileChildren(ParentRouteChildren)
 
+interface TeacherAlertsRouteChildren {
+  TeacherAlertsAlertIdRoute: typeof TeacherAlertsAlertIdRoute
+}
+
+const TeacherAlertsRouteChildren: TeacherAlertsRouteChildren = {
+  TeacherAlertsAlertIdRoute: TeacherAlertsAlertIdRoute,
+}
+
+const TeacherAlertsRouteWithChildren = TeacherAlertsRoute._addFileChildren(
+  TeacherAlertsRouteChildren,
+)
+
+interface TeacherRosterRouteChildren {
+  TeacherRosterStudentIdRoute: typeof TeacherRosterStudentIdRoute
+}
+
+const TeacherRosterRouteChildren: TeacherRosterRouteChildren = {
+  TeacherRosterStudentIdRoute: TeacherRosterStudentIdRoute,
+}
+
+const TeacherRosterRouteWithChildren = TeacherRosterRoute._addFileChildren(
+  TeacherRosterRouteChildren,
+)
+
 interface TeacherRouteChildren {
+  TeacherAlertsRoute: typeof TeacherAlertsRouteWithChildren
   TeacherHomeRoute: typeof TeacherHomeRoute
-  TeacherRosterRoute: typeof TeacherRosterRoute
+  TeacherRosterRoute: typeof TeacherRosterRouteWithChildren
   TeacherIndexRoute: typeof TeacherIndexRoute
 }
 
 const TeacherRouteChildren: TeacherRouteChildren = {
+  TeacherAlertsRoute: TeacherAlertsRouteWithChildren,
   TeacherHomeRoute: TeacherHomeRoute,
-  TeacherRosterRoute: TeacherRosterRoute,
+  TeacherRosterRoute: TeacherRosterRouteWithChildren,
   TeacherIndexRoute: TeacherIndexRoute,
 }
 
