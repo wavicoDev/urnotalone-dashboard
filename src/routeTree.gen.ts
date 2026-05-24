@@ -21,6 +21,8 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
 import { Route as ParentIndexRouteImport } from './routes/parent.index'
+import { Route as TeacherRosterRouteImport } from './routes/teacher.roster'
+import { Route as TeacherHomeRouteImport } from './routes/teacher.home'
 import { Route as ParentTimelineRouteImport } from './routes/parent.timeline'
 import { Route as ParentResourcesRouteImport } from './routes/parent.resources'
 import { Route as ParentHomeRouteImport } from './routes/parent.home'
@@ -91,6 +93,16 @@ const ParentIndexRoute = ParentIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ParentRoute,
 } as any)
+const TeacherRosterRoute = TeacherRosterRouteImport.update({
+  id: '/roster',
+  path: '/roster',
+  getParentRoute: () => TeacherRoute,
+} as any)
+const TeacherHomeRoute = TeacherHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => TeacherRoute,
+} as any)
 const ParentTimelineRoute = ParentTimelineRouteImport.update({
   id: '/timeline',
   path: '/timeline',
@@ -156,6 +168,8 @@ export interface FileRoutesByFullPath {
   '/parent/home': typeof ParentHomeRoute
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/home': typeof TeacherHomeRoute
+  '/teacher/roster': typeof TeacherRosterRoute
   '/parent/': typeof ParentIndexRoute
   '/teacher/': typeof TeacherIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
@@ -177,6 +191,8 @@ export interface FileRoutesByTo {
   '/parent/home': typeof ParentHomeRoute
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/home': typeof TeacherHomeRoute
+  '/teacher/roster': typeof TeacherRosterRoute
   '/parent': typeof ParentIndexRoute
   '/teacher': typeof TeacherIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
@@ -201,6 +217,8 @@ export interface FileRoutesById {
   '/parent/home': typeof ParentHomeRoute
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/home': typeof TeacherHomeRoute
+  '/teacher/roster': typeof TeacherRosterRoute
   '/parent/': typeof ParentIndexRoute
   '/teacher/': typeof TeacherIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
@@ -226,6 +244,8 @@ export interface FileRouteTypes {
     | '/parent/home'
     | '/parent/resources'
     | '/parent/timeline'
+    | '/teacher/home'
+    | '/teacher/roster'
     | '/parent/'
     | '/teacher/'
     | '/parent/alerts/$alertId'
@@ -247,6 +267,8 @@ export interface FileRouteTypes {
     | '/parent/home'
     | '/parent/resources'
     | '/parent/timeline'
+    | '/teacher/home'
+    | '/teacher/roster'
     | '/parent'
     | '/teacher'
     | '/parent/alerts/$alertId'
@@ -270,6 +292,8 @@ export interface FileRouteTypes {
     | '/parent/home'
     | '/parent/resources'
     | '/parent/timeline'
+    | '/teacher/home'
+    | '/teacher/roster'
     | '/parent/'
     | '/teacher/'
     | '/parent/alerts/$alertId'
@@ -373,6 +397,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/parent/'
       preLoaderRoute: typeof ParentIndexRouteImport
       parentRoute: typeof ParentRoute
+    }
+    '/teacher/roster': {
+      id: '/teacher/roster'
+      path: '/roster'
+      fullPath: '/teacher/roster'
+      preLoaderRoute: typeof TeacherRosterRouteImport
+      parentRoute: typeof TeacherRoute
+    }
+    '/teacher/home': {
+      id: '/teacher/home'
+      path: '/home'
+      fullPath: '/teacher/home'
+      preLoaderRoute: typeof TeacherHomeRouteImport
+      parentRoute: typeof TeacherRoute
     }
     '/parent/timeline': {
       id: '/parent/timeline'
@@ -480,10 +518,14 @@ const ParentRouteWithChildren =
   ParentRoute._addFileChildren(ParentRouteChildren)
 
 interface TeacherRouteChildren {
+  TeacherHomeRoute: typeof TeacherHomeRoute
+  TeacherRosterRoute: typeof TeacherRosterRoute
   TeacherIndexRoute: typeof TeacherIndexRoute
 }
 
 const TeacherRouteChildren: TeacherRouteChildren = {
+  TeacherHomeRoute: TeacherHomeRoute,
+  TeacherRosterRoute: TeacherRosterRoute,
   TeacherIndexRoute: TeacherIndexRoute,
 }
 
