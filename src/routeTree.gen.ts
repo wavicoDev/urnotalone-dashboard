@@ -22,6 +22,7 @@ import { Route as ParentTimelineRouteImport } from './routes/parent.timeline'
 import { Route as ParentHomeRouteImport } from './routes/parent.home'
 import { Route as ParentGrowthRouteImport } from './routes/parent.growth'
 import { Route as ParentCoachingRouteImport } from './routes/parent.coaching'
+import { Route as ParentChildRouteImport } from './routes/parent.child'
 import { Route as ParentAlertsRouteImport } from './routes/parent.alerts'
 import { Route as ParentAlertsAlertIdRouteImport } from './routes/parent.alerts.$alertId'
 
@@ -90,6 +91,11 @@ const ParentCoachingRoute = ParentCoachingRouteImport.update({
   path: '/coaching',
   getParentRoute: () => ParentRoute,
 } as any)
+const ParentChildRoute = ParentChildRouteImport.update({
+  id: '/child',
+  path: '/child',
+  getParentRoute: () => ParentRoute,
+} as any)
 const ParentAlertsRoute = ParentAlertsRouteImport.update({
   id: '/alerts',
   path: '/alerts',
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
   '/parent/alerts': typeof ParentAlertsRouteWithChildren
+  '/parent/child': typeof ParentChildRoute
   '/parent/coaching': typeof ParentCoachingRoute
   '/parent/growth': typeof ParentGrowthRoute
   '/parent/home': typeof ParentHomeRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
   '/parent/alerts': typeof ParentAlertsRouteWithChildren
+  '/parent/child': typeof ParentChildRoute
   '/parent/coaching': typeof ParentCoachingRoute
   '/parent/growth': typeof ParentGrowthRoute
   '/parent/home': typeof ParentHomeRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
   '/parent/alerts': typeof ParentAlertsRouteWithChildren
+  '/parent/child': typeof ParentChildRoute
   '/parent/coaching': typeof ParentCoachingRoute
   '/parent/growth': typeof ParentGrowthRoute
   '/parent/home': typeof ParentHomeRoute
@@ -166,6 +175,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/terms'
     | '/parent/alerts'
+    | '/parent/child'
     | '/parent/coaching'
     | '/parent/growth'
     | '/parent/home'
@@ -183,6 +193,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/terms'
     | '/parent/alerts'
+    | '/parent/child'
     | '/parent/coaching'
     | '/parent/growth'
     | '/parent/home'
@@ -200,6 +211,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/terms'
     | '/parent/alerts'
+    | '/parent/child'
     | '/parent/coaching'
     | '/parent/growth'
     | '/parent/home'
@@ -312,6 +324,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentCoachingRouteImport
       parentRoute: typeof ParentRoute
     }
+    '/parent/child': {
+      id: '/parent/child'
+      path: '/child'
+      fullPath: '/parent/child'
+      preLoaderRoute: typeof ParentChildRouteImport
+      parentRoute: typeof ParentRoute
+    }
     '/parent/alerts': {
       id: '/parent/alerts'
       path: '/alerts'
@@ -343,6 +362,7 @@ const ParentAlertsRouteWithChildren = ParentAlertsRoute._addFileChildren(
 
 interface ParentRouteChildren {
   ParentAlertsRoute: typeof ParentAlertsRouteWithChildren
+  ParentChildRoute: typeof ParentChildRoute
   ParentCoachingRoute: typeof ParentCoachingRoute
   ParentGrowthRoute: typeof ParentGrowthRoute
   ParentHomeRoute: typeof ParentHomeRoute
@@ -351,6 +371,7 @@ interface ParentRouteChildren {
 
 const ParentRouteChildren: ParentRouteChildren = {
   ParentAlertsRoute: ParentAlertsRouteWithChildren,
+  ParentChildRoute: ParentChildRoute,
   ParentCoachingRoute: ParentCoachingRoute,
   ParentGrowthRoute: ParentGrowthRoute,
   ParentHomeRoute: ParentHomeRoute,
