@@ -23,6 +23,7 @@ import { Route as ParentHomeRouteImport } from './routes/parent.home'
 import { Route as ParentGrowthRouteImport } from './routes/parent.growth'
 import { Route as ParentCoachingRouteImport } from './routes/parent.coaching'
 import { Route as ParentAlertsRouteImport } from './routes/parent.alerts'
+import { Route as ParentAlertsAlertIdRouteImport } from './routes/parent.alerts.$alertId'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -94,6 +95,11 @@ const ParentAlertsRoute = ParentAlertsRouteImport.update({
   path: '/alerts',
   getParentRoute: () => ParentRoute,
 } as any)
+const ParentAlertsAlertIdRoute = ParentAlertsAlertIdRouteImport.update({
+  id: '/$alertId',
+  path: '/$alertId',
+  getParentRoute: () => ParentAlertsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -105,11 +111,12 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
-  '/parent/alerts': typeof ParentAlertsRoute
+  '/parent/alerts': typeof ParentAlertsRouteWithChildren
   '/parent/coaching': typeof ParentCoachingRoute
   '/parent/growth': typeof ParentGrowthRoute
   '/parent/home': typeof ParentHomeRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -121,11 +128,12 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
-  '/parent/alerts': typeof ParentAlertsRoute
+  '/parent/alerts': typeof ParentAlertsRouteWithChildren
   '/parent/coaching': typeof ParentCoachingRoute
   '/parent/growth': typeof ParentGrowthRoute
   '/parent/home': typeof ParentHomeRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -138,11 +146,12 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
-  '/parent/alerts': typeof ParentAlertsRoute
+  '/parent/alerts': typeof ParentAlertsRouteWithChildren
   '/parent/coaching': typeof ParentCoachingRoute
   '/parent/growth': typeof ParentGrowthRoute
   '/parent/home': typeof ParentHomeRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -161,6 +170,7 @@ export interface FileRouteTypes {
     | '/parent/growth'
     | '/parent/home'
     | '/parent/timeline'
+    | '/parent/alerts/$alertId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -177,6 +187,7 @@ export interface FileRouteTypes {
     | '/parent/growth'
     | '/parent/home'
     | '/parent/timeline'
+    | '/parent/alerts/$alertId'
   id:
     | '__root__'
     | '/'
@@ -193,6 +204,7 @@ export interface FileRouteTypes {
     | '/parent/growth'
     | '/parent/home'
     | '/parent/timeline'
+    | '/parent/alerts/$alertId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -307,11 +319,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParentAlertsRouteImport
       parentRoute: typeof ParentRoute
     }
+    '/parent/alerts/$alertId': {
+      id: '/parent/alerts/$alertId'
+      path: '/$alertId'
+      fullPath: '/parent/alerts/$alertId'
+      preLoaderRoute: typeof ParentAlertsAlertIdRouteImport
+      parentRoute: typeof ParentAlertsRoute
+    }
   }
 }
 
+interface ParentAlertsRouteChildren {
+  ParentAlertsAlertIdRoute: typeof ParentAlertsAlertIdRoute
+}
+
+const ParentAlertsRouteChildren: ParentAlertsRouteChildren = {
+  ParentAlertsAlertIdRoute: ParentAlertsAlertIdRoute,
+}
+
+const ParentAlertsRouteWithChildren = ParentAlertsRoute._addFileChildren(
+  ParentAlertsRouteChildren,
+)
+
 interface ParentRouteChildren {
-  ParentAlertsRoute: typeof ParentAlertsRoute
+  ParentAlertsRoute: typeof ParentAlertsRouteWithChildren
   ParentCoachingRoute: typeof ParentCoachingRoute
   ParentGrowthRoute: typeof ParentGrowthRoute
   ParentHomeRoute: typeof ParentHomeRoute
@@ -319,7 +350,7 @@ interface ParentRouteChildren {
 }
 
 const ParentRouteChildren: ParentRouteChildren = {
-  ParentAlertsRoute: ParentAlertsRoute,
+  ParentAlertsRoute: ParentAlertsRouteWithChildren,
   ParentCoachingRoute: ParentCoachingRoute,
   ParentGrowthRoute: ParentGrowthRoute,
   ParentHomeRoute: ParentHomeRoute,
