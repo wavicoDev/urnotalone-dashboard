@@ -22,8 +22,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
 import { Route as ParentIndexRouteImport } from './routes/parent.index'
 import { Route as TeacherRosterRouteImport } from './routes/teacher.roster'
+import { Route as TeacherReportRouteImport } from './routes/teacher.report'
 import { Route as TeacherHomeRouteImport } from './routes/teacher.home'
 import { Route as TeacherAlertsRouteImport } from './routes/teacher.alerts'
+import { Route as TeacherActivitiesRouteImport } from './routes/teacher.activities'
+import { Route as TeacherAccountRouteImport } from './routes/teacher.account'
 import { Route as ParentTimelineRouteImport } from './routes/parent.timeline'
 import { Route as ParentResourcesRouteImport } from './routes/parent.resources'
 import { Route as ParentHomeRouteImport } from './routes/parent.home'
@@ -101,6 +104,11 @@ const TeacherRosterRoute = TeacherRosterRouteImport.update({
   path: '/roster',
   getParentRoute: () => TeacherRoute,
 } as any)
+const TeacherReportRoute = TeacherReportRouteImport.update({
+  id: '/report',
+  path: '/report',
+  getParentRoute: () => TeacherRoute,
+} as any)
 const TeacherHomeRoute = TeacherHomeRouteImport.update({
   id: '/home',
   path: '/home',
@@ -109,6 +117,16 @@ const TeacherHomeRoute = TeacherHomeRouteImport.update({
 const TeacherAlertsRoute = TeacherAlertsRouteImport.update({
   id: '/alerts',
   path: '/alerts',
+  getParentRoute: () => TeacherRoute,
+} as any)
+const TeacherActivitiesRoute = TeacherActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
+  getParentRoute: () => TeacherRoute,
+} as any)
+const TeacherAccountRoute = TeacherAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
   getParentRoute: () => TeacherRoute,
 } as any)
 const ParentTimelineRoute = ParentTimelineRouteImport.update({
@@ -186,8 +204,11 @@ export interface FileRoutesByFullPath {
   '/parent/home': typeof ParentHomeRoute
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/account': typeof TeacherAccountRoute
+  '/teacher/activities': typeof TeacherActivitiesRoute
   '/teacher/alerts': typeof TeacherAlertsRouteWithChildren
   '/teacher/home': typeof TeacherHomeRoute
+  '/teacher/report': typeof TeacherReportRoute
   '/teacher/roster': typeof TeacherRosterRouteWithChildren
   '/parent/': typeof ParentIndexRoute
   '/teacher/': typeof TeacherIndexRoute
@@ -212,8 +233,11 @@ export interface FileRoutesByTo {
   '/parent/home': typeof ParentHomeRoute
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/account': typeof TeacherAccountRoute
+  '/teacher/activities': typeof TeacherActivitiesRoute
   '/teacher/alerts': typeof TeacherAlertsRouteWithChildren
   '/teacher/home': typeof TeacherHomeRoute
+  '/teacher/report': typeof TeacherReportRoute
   '/teacher/roster': typeof TeacherRosterRouteWithChildren
   '/parent': typeof ParentIndexRoute
   '/teacher': typeof TeacherIndexRoute
@@ -241,8 +265,11 @@ export interface FileRoutesById {
   '/parent/home': typeof ParentHomeRoute
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/account': typeof TeacherAccountRoute
+  '/teacher/activities': typeof TeacherActivitiesRoute
   '/teacher/alerts': typeof TeacherAlertsRouteWithChildren
   '/teacher/home': typeof TeacherHomeRoute
+  '/teacher/report': typeof TeacherReportRoute
   '/teacher/roster': typeof TeacherRosterRouteWithChildren
   '/parent/': typeof ParentIndexRoute
   '/teacher/': typeof TeacherIndexRoute
@@ -271,8 +298,11 @@ export interface FileRouteTypes {
     | '/parent/home'
     | '/parent/resources'
     | '/parent/timeline'
+    | '/teacher/account'
+    | '/teacher/activities'
     | '/teacher/alerts'
     | '/teacher/home'
+    | '/teacher/report'
     | '/teacher/roster'
     | '/parent/'
     | '/teacher/'
@@ -297,8 +327,11 @@ export interface FileRouteTypes {
     | '/parent/home'
     | '/parent/resources'
     | '/parent/timeline'
+    | '/teacher/account'
+    | '/teacher/activities'
     | '/teacher/alerts'
     | '/teacher/home'
+    | '/teacher/report'
     | '/teacher/roster'
     | '/parent'
     | '/teacher'
@@ -325,8 +358,11 @@ export interface FileRouteTypes {
     | '/parent/home'
     | '/parent/resources'
     | '/parent/timeline'
+    | '/teacher/account'
+    | '/teacher/activities'
     | '/teacher/alerts'
     | '/teacher/home'
+    | '/teacher/report'
     | '/teacher/roster'
     | '/parent/'
     | '/teacher/'
@@ -441,6 +477,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeacherRosterRouteImport
       parentRoute: typeof TeacherRoute
     }
+    '/teacher/report': {
+      id: '/teacher/report'
+      path: '/report'
+      fullPath: '/teacher/report'
+      preLoaderRoute: typeof TeacherReportRouteImport
+      parentRoute: typeof TeacherRoute
+    }
     '/teacher/home': {
       id: '/teacher/home'
       path: '/home'
@@ -453,6 +496,20 @@ declare module '@tanstack/react-router' {
       path: '/alerts'
       fullPath: '/teacher/alerts'
       preLoaderRoute: typeof TeacherAlertsRouteImport
+      parentRoute: typeof TeacherRoute
+    }
+    '/teacher/activities': {
+      id: '/teacher/activities'
+      path: '/activities'
+      fullPath: '/teacher/activities'
+      preLoaderRoute: typeof TeacherActivitiesRouteImport
+      parentRoute: typeof TeacherRoute
+    }
+    '/teacher/account': {
+      id: '/teacher/account'
+      path: '/account'
+      fullPath: '/teacher/account'
+      preLoaderRoute: typeof TeacherAccountRouteImport
       parentRoute: typeof TeacherRoute
     }
     '/parent/timeline': {
@@ -599,15 +656,21 @@ const TeacherRosterRouteWithChildren = TeacherRosterRoute._addFileChildren(
 )
 
 interface TeacherRouteChildren {
+  TeacherAccountRoute: typeof TeacherAccountRoute
+  TeacherActivitiesRoute: typeof TeacherActivitiesRoute
   TeacherAlertsRoute: typeof TeacherAlertsRouteWithChildren
   TeacherHomeRoute: typeof TeacherHomeRoute
+  TeacherReportRoute: typeof TeacherReportRoute
   TeacherRosterRoute: typeof TeacherRosterRouteWithChildren
   TeacherIndexRoute: typeof TeacherIndexRoute
 }
 
 const TeacherRouteChildren: TeacherRouteChildren = {
+  TeacherAccountRoute: TeacherAccountRoute,
+  TeacherActivitiesRoute: TeacherActivitiesRoute,
   TeacherAlertsRoute: TeacherAlertsRouteWithChildren,
   TeacherHomeRoute: TeacherHomeRoute,
+  TeacherReportRoute: TeacherReportRoute,
   TeacherRosterRoute: TeacherRosterRouteWithChildren,
   TeacherIndexRoute: TeacherIndexRoute,
 }
