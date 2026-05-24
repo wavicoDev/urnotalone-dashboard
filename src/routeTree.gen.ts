@@ -9,38 +9,446 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TeacherRouteImport } from './routes/teacher'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ParentRouteImport } from './routes/parent'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
+import { Route as ParentIndexRouteImport } from './routes/parent.index'
+import { Route as TeacherRosterRouteImport } from './routes/teacher.roster'
+import { Route as TeacherReportRouteImport } from './routes/teacher.report'
+import { Route as TeacherHomeRouteImport } from './routes/teacher.home'
+import { Route as TeacherAlertsRouteImport } from './routes/teacher.alerts'
+import { Route as TeacherActivitiesRouteImport } from './routes/teacher.activities'
+import { Route as TeacherAccountRouteImport } from './routes/teacher.account'
+import { Route as ParentTimelineRouteImport } from './routes/parent.timeline'
+import { Route as ParentResourcesRouteImport } from './routes/parent.resources'
+import { Route as ParentHomeRouteImport } from './routes/parent.home'
+import { Route as ParentGrowthRouteImport } from './routes/parent.growth'
+import { Route as ParentCoachingRouteImport } from './routes/parent.coaching'
+import { Route as ParentChildRouteImport } from './routes/parent.child'
+import { Route as ParentAlertsRouteImport } from './routes/parent.alerts'
+import { Route as ParentAccountRouteImport } from './routes/parent.account'
+import { Route as TeacherRosterStudentIdRouteImport } from './routes/teacher.roster.$studentId'
+import { Route as TeacherAlertsAlertIdRouteImport } from './routes/teacher.alerts.$alertId'
+import { Route as ParentAlertsAlertIdRouteImport } from './routes/parent.alerts.$alertId'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherRoute = TeacherRouteImport.update({
+  id: '/teacher',
+  path: '/teacher',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentRoute = ParentRouteImport.update({
+  id: '/parent',
+  path: '/parent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GovernanceRoute = GovernanceRouteImport.update({
+  id: '/governance',
+  path: '/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeacherIndexRoute = TeacherIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TeacherRoute,
+} as any)
+const ParentIndexRoute = ParentIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ParentRoute,
+} as any)
+const TeacherRosterRoute = TeacherRosterRouteImport.update({
+  id: '/roster',
+  path: '/roster',
+  getParentRoute: () => TeacherRoute,
+} as any)
+const TeacherReportRoute = TeacherReportRouteImport.update({
+  id: '/report',
+  path: '/report',
+  getParentRoute: () => TeacherRoute,
+} as any)
+const TeacherHomeRoute = TeacherHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => TeacherRoute,
+} as any)
+const TeacherAlertsRoute = TeacherAlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => TeacherRoute,
+} as any)
+const TeacherActivitiesRoute = TeacherActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
+  getParentRoute: () => TeacherRoute,
+} as any)
+const TeacherAccountRoute = TeacherAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => TeacherRoute,
+} as any)
+const ParentTimelineRoute = ParentTimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentResourcesRoute = ParentResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentHomeRoute = ParentHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentGrowthRoute = ParentGrowthRouteImport.update({
+  id: '/growth',
+  path: '/growth',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentCoachingRoute = ParentCoachingRouteImport.update({
+  id: '/coaching',
+  path: '/coaching',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentChildRoute = ParentChildRouteImport.update({
+  id: '/child',
+  path: '/child',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentAlertsRoute = ParentAlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => ParentRoute,
+} as any)
+const ParentAccountRoute = ParentAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => ParentRoute,
+} as any)
+const TeacherRosterStudentIdRoute = TeacherRosterStudentIdRouteImport.update({
+  id: '/$studentId',
+  path: '/$studentId',
+  getParentRoute: () => TeacherRosterRoute,
+} as any)
+const TeacherAlertsAlertIdRoute = TeacherAlertsAlertIdRouteImport.update({
+  id: '/$alertId',
+  path: '/$alertId',
+  getParentRoute: () => TeacherAlertsRoute,
+} as any)
+const ParentAlertsAlertIdRoute = ParentAlertsAlertIdRouteImport.update({
+  id: '/$alertId',
+  path: '/$alertId',
+  getParentRoute: () => ParentAlertsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/governance': typeof GovernanceRoute
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
+  '/parent': typeof ParentRouteWithChildren
+  '/privacy': typeof PrivacyRoute
+  '/signup': typeof SignupRoute
+  '/teacher': typeof TeacherRouteWithChildren
+  '/terms': typeof TermsRoute
+  '/parent/account': typeof ParentAccountRoute
+  '/parent/alerts': typeof ParentAlertsRouteWithChildren
+  '/parent/child': typeof ParentChildRoute
+  '/parent/coaching': typeof ParentCoachingRoute
+  '/parent/growth': typeof ParentGrowthRoute
+  '/parent/home': typeof ParentHomeRoute
+  '/parent/resources': typeof ParentResourcesRoute
+  '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/account': typeof TeacherAccountRoute
+  '/teacher/activities': typeof TeacherActivitiesRoute
+  '/teacher/alerts': typeof TeacherAlertsRouteWithChildren
+  '/teacher/home': typeof TeacherHomeRoute
+  '/teacher/report': typeof TeacherReportRoute
+  '/teacher/roster': typeof TeacherRosterRouteWithChildren
+  '/parent/': typeof ParentIndexRoute
+  '/teacher/': typeof TeacherIndexRoute
+  '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
+  '/teacher/alerts/$alertId': typeof TeacherAlertsAlertIdRoute
+  '/teacher/roster/$studentId': typeof TeacherRosterStudentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/governance': typeof GovernanceRoute
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
+  '/privacy': typeof PrivacyRoute
+  '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
+  '/parent/account': typeof ParentAccountRoute
+  '/parent/alerts': typeof ParentAlertsRouteWithChildren
+  '/parent/child': typeof ParentChildRoute
+  '/parent/coaching': typeof ParentCoachingRoute
+  '/parent/growth': typeof ParentGrowthRoute
+  '/parent/home': typeof ParentHomeRoute
+  '/parent/resources': typeof ParentResourcesRoute
+  '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/account': typeof TeacherAccountRoute
+  '/teacher/activities': typeof TeacherActivitiesRoute
+  '/teacher/alerts': typeof TeacherAlertsRouteWithChildren
+  '/teacher/home': typeof TeacherHomeRoute
+  '/teacher/report': typeof TeacherReportRoute
+  '/teacher/roster': typeof TeacherRosterRouteWithChildren
+  '/parent': typeof ParentIndexRoute
+  '/teacher': typeof TeacherIndexRoute
+  '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
+  '/teacher/alerts/$alertId': typeof TeacherAlertsAlertIdRoute
+  '/teacher/roster/$studentId': typeof TeacherRosterStudentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/governance': typeof GovernanceRoute
+  '/login': typeof LoginRoute
+  '/onboarding': typeof OnboardingRoute
+  '/parent': typeof ParentRouteWithChildren
+  '/privacy': typeof PrivacyRoute
+  '/signup': typeof SignupRoute
+  '/teacher': typeof TeacherRouteWithChildren
+  '/terms': typeof TermsRoute
+  '/parent/account': typeof ParentAccountRoute
+  '/parent/alerts': typeof ParentAlertsRouteWithChildren
+  '/parent/child': typeof ParentChildRoute
+  '/parent/coaching': typeof ParentCoachingRoute
+  '/parent/growth': typeof ParentGrowthRoute
+  '/parent/home': typeof ParentHomeRoute
+  '/parent/resources': typeof ParentResourcesRoute
+  '/parent/timeline': typeof ParentTimelineRoute
+  '/teacher/account': typeof TeacherAccountRoute
+  '/teacher/activities': typeof TeacherActivitiesRoute
+  '/teacher/alerts': typeof TeacherAlertsRouteWithChildren
+  '/teacher/home': typeof TeacherHomeRoute
+  '/teacher/report': typeof TeacherReportRoute
+  '/teacher/roster': typeof TeacherRosterRouteWithChildren
+  '/parent/': typeof ParentIndexRoute
+  '/teacher/': typeof TeacherIndexRoute
+  '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
+  '/teacher/alerts/$alertId': typeof TeacherAlertsAlertIdRoute
+  '/teacher/roster/$studentId': typeof TeacherRosterStudentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/governance'
+    | '/login'
+    | '/onboarding'
+    | '/parent'
+    | '/privacy'
+    | '/signup'
+    | '/teacher'
+    | '/terms'
+    | '/parent/account'
+    | '/parent/alerts'
+    | '/parent/child'
+    | '/parent/coaching'
+    | '/parent/growth'
+    | '/parent/home'
+    | '/parent/resources'
+    | '/parent/timeline'
+    | '/teacher/account'
+    | '/teacher/activities'
+    | '/teacher/alerts'
+    | '/teacher/home'
+    | '/teacher/report'
+    | '/teacher/roster'
+    | '/parent/'
+    | '/teacher/'
+    | '/parent/alerts/$alertId'
+    | '/teacher/alerts/$alertId'
+    | '/teacher/roster/$studentId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/governance'
+    | '/login'
+    | '/onboarding'
+    | '/privacy'
+    | '/signup'
+    | '/terms'
+    | '/parent/account'
+    | '/parent/alerts'
+    | '/parent/child'
+    | '/parent/coaching'
+    | '/parent/growth'
+    | '/parent/home'
+    | '/parent/resources'
+    | '/parent/timeline'
+    | '/teacher/account'
+    | '/teacher/activities'
+    | '/teacher/alerts'
+    | '/teacher/home'
+    | '/teacher/report'
+    | '/teacher/roster'
+    | '/parent'
+    | '/teacher'
+    | '/parent/alerts/$alertId'
+    | '/teacher/alerts/$alertId'
+    | '/teacher/roster/$studentId'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/governance'
+    | '/login'
+    | '/onboarding'
+    | '/parent'
+    | '/privacy'
+    | '/signup'
+    | '/teacher'
+    | '/terms'
+    | '/parent/account'
+    | '/parent/alerts'
+    | '/parent/child'
+    | '/parent/coaching'
+    | '/parent/growth'
+    | '/parent/home'
+    | '/parent/resources'
+    | '/parent/timeline'
+    | '/teacher/account'
+    | '/teacher/activities'
+    | '/teacher/alerts'
+    | '/teacher/home'
+    | '/teacher/report'
+    | '/teacher/roster'
+    | '/parent/'
+    | '/teacher/'
+    | '/parent/alerts/$alertId'
+    | '/teacher/alerts/$alertId'
+    | '/teacher/roster/$studentId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  GovernanceRoute: typeof GovernanceRoute
+  LoginRoute: typeof LoginRoute
+  OnboardingRoute: typeof OnboardingRoute
+  ParentRoute: typeof ParentRouteWithChildren
+  PrivacyRoute: typeof PrivacyRoute
+  SignupRoute: typeof SignupRoute
+  TeacherRoute: typeof TeacherRouteWithChildren
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher': {
+      id: '/teacher'
+      path: '/teacher'
+      fullPath: '/teacher'
+      preLoaderRoute: typeof TeacherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent': {
+      id: '/parent'
+      path: '/parent'
+      fullPath: '/parent'
+      preLoaderRoute: typeof ParentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/governance': {
+      id: '/governance'
+      path: '/governance'
+      fullPath: '/governance'
+      preLoaderRoute: typeof GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +456,240 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teacher/': {
+      id: '/teacher/'
+      path: '/'
+      fullPath: '/teacher/'
+      preLoaderRoute: typeof TeacherIndexRouteImport
+      parentRoute: typeof TeacherRoute
+    }
+    '/parent/': {
+      id: '/parent/'
+      path: '/'
+      fullPath: '/parent/'
+      preLoaderRoute: typeof ParentIndexRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/teacher/roster': {
+      id: '/teacher/roster'
+      path: '/roster'
+      fullPath: '/teacher/roster'
+      preLoaderRoute: typeof TeacherRosterRouteImport
+      parentRoute: typeof TeacherRoute
+    }
+    '/teacher/report': {
+      id: '/teacher/report'
+      path: '/report'
+      fullPath: '/teacher/report'
+      preLoaderRoute: typeof TeacherReportRouteImport
+      parentRoute: typeof TeacherRoute
+    }
+    '/teacher/home': {
+      id: '/teacher/home'
+      path: '/home'
+      fullPath: '/teacher/home'
+      preLoaderRoute: typeof TeacherHomeRouteImport
+      parentRoute: typeof TeacherRoute
+    }
+    '/teacher/alerts': {
+      id: '/teacher/alerts'
+      path: '/alerts'
+      fullPath: '/teacher/alerts'
+      preLoaderRoute: typeof TeacherAlertsRouteImport
+      parentRoute: typeof TeacherRoute
+    }
+    '/teacher/activities': {
+      id: '/teacher/activities'
+      path: '/activities'
+      fullPath: '/teacher/activities'
+      preLoaderRoute: typeof TeacherActivitiesRouteImport
+      parentRoute: typeof TeacherRoute
+    }
+    '/teacher/account': {
+      id: '/teacher/account'
+      path: '/account'
+      fullPath: '/teacher/account'
+      preLoaderRoute: typeof TeacherAccountRouteImport
+      parentRoute: typeof TeacherRoute
+    }
+    '/parent/timeline': {
+      id: '/parent/timeline'
+      path: '/timeline'
+      fullPath: '/parent/timeline'
+      preLoaderRoute: typeof ParentTimelineRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/resources': {
+      id: '/parent/resources'
+      path: '/resources'
+      fullPath: '/parent/resources'
+      preLoaderRoute: typeof ParentResourcesRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/home': {
+      id: '/parent/home'
+      path: '/home'
+      fullPath: '/parent/home'
+      preLoaderRoute: typeof ParentHomeRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/growth': {
+      id: '/parent/growth'
+      path: '/growth'
+      fullPath: '/parent/growth'
+      preLoaderRoute: typeof ParentGrowthRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/coaching': {
+      id: '/parent/coaching'
+      path: '/coaching'
+      fullPath: '/parent/coaching'
+      preLoaderRoute: typeof ParentCoachingRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/child': {
+      id: '/parent/child'
+      path: '/child'
+      fullPath: '/parent/child'
+      preLoaderRoute: typeof ParentChildRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/alerts': {
+      id: '/parent/alerts'
+      path: '/alerts'
+      fullPath: '/parent/alerts'
+      preLoaderRoute: typeof ParentAlertsRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/parent/account': {
+      id: '/parent/account'
+      path: '/account'
+      fullPath: '/parent/account'
+      preLoaderRoute: typeof ParentAccountRouteImport
+      parentRoute: typeof ParentRoute
+    }
+    '/teacher/roster/$studentId': {
+      id: '/teacher/roster/$studentId'
+      path: '/$studentId'
+      fullPath: '/teacher/roster/$studentId'
+      preLoaderRoute: typeof TeacherRosterStudentIdRouteImport
+      parentRoute: typeof TeacherRosterRoute
+    }
+    '/teacher/alerts/$alertId': {
+      id: '/teacher/alerts/$alertId'
+      path: '/$alertId'
+      fullPath: '/teacher/alerts/$alertId'
+      preLoaderRoute: typeof TeacherAlertsAlertIdRouteImport
+      parentRoute: typeof TeacherAlertsRoute
+    }
+    '/parent/alerts/$alertId': {
+      id: '/parent/alerts/$alertId'
+      path: '/$alertId'
+      fullPath: '/parent/alerts/$alertId'
+      preLoaderRoute: typeof ParentAlertsAlertIdRouteImport
+      parentRoute: typeof ParentAlertsRoute
+    }
   }
 }
 
+interface ParentAlertsRouteChildren {
+  ParentAlertsAlertIdRoute: typeof ParentAlertsAlertIdRoute
+}
+
+const ParentAlertsRouteChildren: ParentAlertsRouteChildren = {
+  ParentAlertsAlertIdRoute: ParentAlertsAlertIdRoute,
+}
+
+const ParentAlertsRouteWithChildren = ParentAlertsRoute._addFileChildren(
+  ParentAlertsRouteChildren,
+)
+
+interface ParentRouteChildren {
+  ParentAccountRoute: typeof ParentAccountRoute
+  ParentAlertsRoute: typeof ParentAlertsRouteWithChildren
+  ParentChildRoute: typeof ParentChildRoute
+  ParentCoachingRoute: typeof ParentCoachingRoute
+  ParentGrowthRoute: typeof ParentGrowthRoute
+  ParentHomeRoute: typeof ParentHomeRoute
+  ParentResourcesRoute: typeof ParentResourcesRoute
+  ParentTimelineRoute: typeof ParentTimelineRoute
+  ParentIndexRoute: typeof ParentIndexRoute
+}
+
+const ParentRouteChildren: ParentRouteChildren = {
+  ParentAccountRoute: ParentAccountRoute,
+  ParentAlertsRoute: ParentAlertsRouteWithChildren,
+  ParentChildRoute: ParentChildRoute,
+  ParentCoachingRoute: ParentCoachingRoute,
+  ParentGrowthRoute: ParentGrowthRoute,
+  ParentHomeRoute: ParentHomeRoute,
+  ParentResourcesRoute: ParentResourcesRoute,
+  ParentTimelineRoute: ParentTimelineRoute,
+  ParentIndexRoute: ParentIndexRoute,
+}
+
+const ParentRouteWithChildren =
+  ParentRoute._addFileChildren(ParentRouteChildren)
+
+interface TeacherAlertsRouteChildren {
+  TeacherAlertsAlertIdRoute: typeof TeacherAlertsAlertIdRoute
+}
+
+const TeacherAlertsRouteChildren: TeacherAlertsRouteChildren = {
+  TeacherAlertsAlertIdRoute: TeacherAlertsAlertIdRoute,
+}
+
+const TeacherAlertsRouteWithChildren = TeacherAlertsRoute._addFileChildren(
+  TeacherAlertsRouteChildren,
+)
+
+interface TeacherRosterRouteChildren {
+  TeacherRosterStudentIdRoute: typeof TeacherRosterStudentIdRoute
+}
+
+const TeacherRosterRouteChildren: TeacherRosterRouteChildren = {
+  TeacherRosterStudentIdRoute: TeacherRosterStudentIdRoute,
+}
+
+const TeacherRosterRouteWithChildren = TeacherRosterRoute._addFileChildren(
+  TeacherRosterRouteChildren,
+)
+
+interface TeacherRouteChildren {
+  TeacherAccountRoute: typeof TeacherAccountRoute
+  TeacherActivitiesRoute: typeof TeacherActivitiesRoute
+  TeacherAlertsRoute: typeof TeacherAlertsRouteWithChildren
+  TeacherHomeRoute: typeof TeacherHomeRoute
+  TeacherReportRoute: typeof TeacherReportRoute
+  TeacherRosterRoute: typeof TeacherRosterRouteWithChildren
+  TeacherIndexRoute: typeof TeacherIndexRoute
+}
+
+const TeacherRouteChildren: TeacherRouteChildren = {
+  TeacherAccountRoute: TeacherAccountRoute,
+  TeacherActivitiesRoute: TeacherActivitiesRoute,
+  TeacherAlertsRoute: TeacherAlertsRouteWithChildren,
+  TeacherHomeRoute: TeacherHomeRoute,
+  TeacherReportRoute: TeacherReportRoute,
+  TeacherRosterRoute: TeacherRosterRouteWithChildren,
+  TeacherIndexRoute: TeacherIndexRoute,
+}
+
+const TeacherRouteWithChildren =
+  TeacherRoute._addFileChildren(TeacherRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  GovernanceRoute: GovernanceRoute,
+  LoginRoute: LoginRoute,
+  OnboardingRoute: OnboardingRoute,
+  ParentRoute: ParentRouteWithChildren,
+  PrivacyRoute: PrivacyRoute,
+  SignupRoute: SignupRoute,
+  TeacherRoute: TeacherRouteWithChildren,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
