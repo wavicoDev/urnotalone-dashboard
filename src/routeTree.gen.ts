@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TeacherRouteImport } from './routes/teacher'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ParentRouteImport } from './routes/parent'
@@ -18,6 +19,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
 import { Route as ParentIndexRouteImport } from './routes/parent.index'
 import { Route as ParentTimelineRouteImport } from './routes/parent.timeline'
 import { Route as ParentResourcesRouteImport } from './routes/parent.resources'
@@ -32,6 +34,11 @@ import { Route as ParentAlertsAlertIdRouteImport } from './routes/parent.alerts.
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherRoute = TeacherRouteImport.update({
+  id: '/teacher',
+  path: '/teacher',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -73,6 +80,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherIndexRoute = TeacherIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TeacherRoute,
 } as any)
 const ParentIndexRoute = ParentIndexRouteImport.update({
   id: '/',
@@ -134,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/parent': typeof ParentRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
+  '/teacher': typeof TeacherRouteWithChildren
   '/terms': typeof TermsRoute
   '/parent/account': typeof ParentAccountRoute
   '/parent/alerts': typeof ParentAlertsRouteWithChildren
@@ -144,6 +157,7 @@ export interface FileRoutesByFullPath {
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
   '/parent/': typeof ParentIndexRoute
+  '/teacher/': typeof TeacherIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
 }
 export interface FileRoutesByTo {
@@ -164,6 +178,7 @@ export interface FileRoutesByTo {
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
   '/parent': typeof ParentIndexRoute
+  '/teacher': typeof TeacherIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
 }
 export interface FileRoutesById {
@@ -176,6 +191,7 @@ export interface FileRoutesById {
   '/parent': typeof ParentRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
+  '/teacher': typeof TeacherRouteWithChildren
   '/terms': typeof TermsRoute
   '/parent/account': typeof ParentAccountRoute
   '/parent/alerts': typeof ParentAlertsRouteWithChildren
@@ -186,6 +202,7 @@ export interface FileRoutesById {
   '/parent/resources': typeof ParentResourcesRoute
   '/parent/timeline': typeof ParentTimelineRoute
   '/parent/': typeof ParentIndexRoute
+  '/teacher/': typeof TeacherIndexRoute
   '/parent/alerts/$alertId': typeof ParentAlertsAlertIdRoute
 }
 export interface FileRouteTypes {
@@ -199,6 +216,7 @@ export interface FileRouteTypes {
     | '/parent'
     | '/privacy'
     | '/signup'
+    | '/teacher'
     | '/terms'
     | '/parent/account'
     | '/parent/alerts'
@@ -209,6 +227,7 @@ export interface FileRouteTypes {
     | '/parent/resources'
     | '/parent/timeline'
     | '/parent/'
+    | '/teacher/'
     | '/parent/alerts/$alertId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -229,6 +248,7 @@ export interface FileRouteTypes {
     | '/parent/resources'
     | '/parent/timeline'
     | '/parent'
+    | '/teacher'
     | '/parent/alerts/$alertId'
   id:
     | '__root__'
@@ -240,6 +260,7 @@ export interface FileRouteTypes {
     | '/parent'
     | '/privacy'
     | '/signup'
+    | '/teacher'
     | '/terms'
     | '/parent/account'
     | '/parent/alerts'
@@ -250,6 +271,7 @@ export interface FileRouteTypes {
     | '/parent/resources'
     | '/parent/timeline'
     | '/parent/'
+    | '/teacher/'
     | '/parent/alerts/$alertId'
   fileRoutesById: FileRoutesById
 }
@@ -262,6 +284,7 @@ export interface RootRouteChildren {
   ParentRoute: typeof ParentRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   SignupRoute: typeof SignupRoute
+  TeacherRoute: typeof TeacherRouteWithChildren
   TermsRoute: typeof TermsRoute
 }
 
@@ -272,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher': {
+      id: '/teacher'
+      path: '/teacher'
+      fullPath: '/teacher'
+      preLoaderRoute: typeof TeacherRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -329,6 +359,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/teacher/': {
+      id: '/teacher/'
+      path: '/'
+      fullPath: '/teacher/'
+      preLoaderRoute: typeof TeacherIndexRouteImport
+      parentRoute: typeof TeacherRoute
     }
     '/parent/': {
       id: '/parent/'
@@ -442,6 +479,17 @@ const ParentRouteChildren: ParentRouteChildren = {
 const ParentRouteWithChildren =
   ParentRoute._addFileChildren(ParentRouteChildren)
 
+interface TeacherRouteChildren {
+  TeacherIndexRoute: typeof TeacherIndexRoute
+}
+
+const TeacherRouteChildren: TeacherRouteChildren = {
+  TeacherIndexRoute: TeacherIndexRoute,
+}
+
+const TeacherRouteWithChildren =
+  TeacherRoute._addFileChildren(TeacherRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -451,8 +499,19 @@ const rootRouteChildren: RootRouteChildren = {
   ParentRoute: ParentRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   SignupRoute: SignupRoute,
+  TeacherRoute: TeacherRouteWithChildren,
   TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
